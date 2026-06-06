@@ -19,16 +19,31 @@
 #        state: started
 #        enabled: yes
 
-  - name: variables
-    hosts: localhost
-    connection: local
+# - name: variables
+#   hosts: localhost
+#   connection: local
 
-    vars:
-      name: "murali"
-      lastname: "Akkena"
-      course: "devops"
+#   vars:
+#     name: "murali"
+#     lastname: "Akkena"
+#     course: "devops"
 
-    tasks:
-     name: print variable names
-     ansible.builtin.debug:
-       msg: "HI this {{name}}{{lastname}}, i am learning {{course}}"
+#   tasks:
+#    name: print variable names
+#    ansible.builtin.debug:
+#      msg: "HI this {{name}}{{lastname}}, i am learning {{course}}"
+
+---
+- name: Variables
+  hosts: localhost
+  connection: local
+
+  vars:
+    name: "murali"
+    lastname: "Akkena"
+    course: "devops"
+
+  tasks:
+    - name: Print variable names
+      ansible.builtin.debug:
+        msg: "Hi this is {{ name }} {{ lastname }}, I am learning {{ course }}"
