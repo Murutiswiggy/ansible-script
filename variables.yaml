@@ -34,8 +34,8 @@
 #      msg: "HI this {{name}}{{lastname}}, i am learning {{course}}"
 
 - name: Variables
-  hosts: localhost
-  connection: local
+  hosts: node
+  connection: node
 
   vars:
     name: "murali"
