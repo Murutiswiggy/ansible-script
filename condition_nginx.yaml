@@ -1,0 +1,23 @@
+- name: install nginx using condition
+  hosts: node
+  become: yes
+
+  vars_files:
+    - web_vars.yaml
+    
+  tasks:
+    - name : print os family
+      ansible.builtin.debug:
+        msg: "this servere os family is {{ansible_os_family}}"
+    
+    - name: install nginx only on redhat family
+      ansible.builtin.package:
+         name: "{{web_package}}"
+         state: present
+
+    - name : start naginx only on redhat family
+      ansible.builtin.service:
+          name: "{{web_service}}"
+          state: started
+          enabled: yes     
+  
