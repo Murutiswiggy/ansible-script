@@ -1,5 +1,5 @@
 - name: "install and start nginx"
-  hosts: "node"
+  hosts: "localhost"
   become: yes
   
   vars:
