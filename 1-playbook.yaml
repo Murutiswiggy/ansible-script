@@ -1,3 +1,11 @@
-- name: "murali"
-  dob: "23-03-1998"
-  rol: "devops"
+- name: "create directory on node server"
+  hosts: "node"
+  become: "false"
+
+  tasks:
+    - name: create demo directory in /tmp
+      ansible.builtin.file:
+        path: /tmp/ansible-demo-dir
+        state: directory
+
+
