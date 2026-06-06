@@ -18,9 +18,9 @@
 #        state: started
 #        enabled: yes
 
-  - name: "variables"
-    hosts: "localhost"
-    connection: "local"
+  - name: variables
+    hosts: localhost
+    connection: local
 
     vars:
       name: "murali"
