@@ -1,29 +1,55 @@
-- name: install nginx using condition
+# - name: install nginx using condition
+#   hosts: node
+#   become: yes
+
+#   vars_files:
+#     - web_vars.yaml
+    
+#   tasks:
+#     - name : print os family
+#       ansible.builtin.debug:
+#         msg: "this servere os family is {{ansible_os_family}}"
+    
+#     - name: install nginx only on RedHat family
+#       ansible.builtin.package:
+#          name: "{{web_package}}"
+#          state: present
+#       when: ansible_os_family == "RedHat"   
+
+#     - name : start naginx only on RedHat family
+#       ansible.builtin.service:
+#           name: "{{web_service}}"
+#           state: started
+#           enabled: yes     
+#       when: ansible_os_family == "RedHat"    
+    
+#     - name: This task should skip on RedHat family
+#       ansible.builtin.debug:
+#         msg: "This is Debian server"
+#       when: ansible_os_family == "Debian"
+
+    
+- name: install linux using condition
   hosts: node
   become: yes
 
   vars_files:
     - web_vars.yaml
-    
+     
   tasks:
-    - name : print os family
+    - name: print linux os family
       ansible.builtin.debug:
-        msg: "this servere os family is {{ansible_os_family}}"
-    
-    - name: install nginx only on RedHat family
-      ansible.builtin.package:
-         name: "{{web_package}}"
-         state: present
-      when: ansible_os_family == "RedHat"   
+        msg: "This server os is {{linux_os_family}}"
 
-    - name : start naginx only on RedHat family
+    - nmae: install ubuntu only on linux server
+      ansible.builtin.package:
+        name: "{{web_package}}"
+        state: present
+      when: linux_os_family == "ubuntu"
+
+    - name: start ubuntu only on linux server
       ansible.builtin.service:
-          name: "{{web_service}}"
-          state: started
-          enabled: yes     
-      when: ansible_os_family == "RedHat"    
-    
-    - name: This task should skip on RedHat family
-      ansible.builtin.debug:
-        msg: "This is Debian server"
-      when: ansible_os_family == "Debian"
+         name: "{{web_service}}"
+         state: started
+         enabled: yes
+  
