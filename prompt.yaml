@@ -2,7 +2,7 @@
   hosts: node
 
   vars_prompt:
-   - name: useraname
+   - name: username
      prompt: "enter your name"
      private: false
 
