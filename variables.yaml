@@ -1,21 +1,31 @@
-- name: "install and start nginx"
-  hosts: "localhost"
-  become: yes
+# - name: "install and start nginx"
+#   hosts: "localhost"
+#   become: yes
   
-  vars:
-   web_package: nginx
-   web_service: nginx
+#   vars:
+#    web_package: nginx
+#    web_service: nginx
 
-  tasks:
-    - name: "install web web_package"
-      ansible.builtin.package:
-       name: "{{web_package}}"
-       state: present
+#   tasks:
+#     - name: "install web web_package"
+#       ansible.builtin.package:
+#        name: "{{web_package}}"
+#        state: present
 
-    - name: "start and enable web web_service"
-      ansible.builtin.service:
-       name: "{{web_service}}"
-       state: started
-       enabled: yes
+#     - name: "start and enable web web_service"
+#       ansible.builtin.service:
+#        name: "{{web_service}}"
+#        state: started
+#        enabled: yes
 
-      
+  - name: "variables"
+    hosts: "localhost"
+    connection: "local"
+
+    vars:
+      name: "murali"
+      lastname: "Akkena"
+      course: "devops"
+    tasks:
+     -debug:
+       msg: "HI this {{name}},{{lastname}}, i am learning {{course}}"
