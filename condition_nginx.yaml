@@ -14,16 +14,16 @@
       ansible.builtin.package:
          name: "{{web_package}}"
          state: present
-      when: ansible_os_family == "redhat"   
+      when: ansible_os_family == "Redhat"   
 
     - name : start naginx only on redhat family
       ansible.builtin.service:
           name: "{{web_service}}"
           state: started
           enabled: yes     
-      when: ansible_os_family == "redhat"    
+      when: ansible_os_family == "Redhat"    
     
     - name: This task should skip on redhar family
       ansible.builtin.debug:
         msg: "This is Debian server"
-      when: ansible_os_family == "debian"
+      when: ansible_os_family == "Debian"
