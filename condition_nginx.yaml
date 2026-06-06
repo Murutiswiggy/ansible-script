@@ -41,7 +41,7 @@
       ansible.builtin.debug:
         msg: "This server os is {{linux_os_family}}"
 
-    - nmae: install ubuntu only on linux server
+    - name: install ubuntu only on linux server
       ansible.builtin.package:
         name: "{{web_package}}"
         state: present
