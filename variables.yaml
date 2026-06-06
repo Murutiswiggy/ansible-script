@@ -27,5 +27,6 @@
       lastname: "Akkena"
       course: "devops"
     tasks:
-     -debug:
+     name: print variable names
+     ansible.builtin.debug:
        msg: "HI this {{name}},{{lastname}}, i am learning {{course}}"
