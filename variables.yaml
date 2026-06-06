@@ -1,3 +1,4 @@
+---
 # - name: "install and start nginx"
 #   hosts: "localhost"
 #   become: yes
@@ -26,7 +27,8 @@
       name: "murali"
       lastname: "Akkena"
       course: "devops"
+
     tasks:
      name: print variable names
      ansible.builtin.debug:
-       msg: "HI this {{name}},{{lastname}}, i am learning {{course}}"
+       msg: "HI this {{name}}{{lastname}}, i am learning {{course}}"
