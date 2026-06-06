@@ -2,7 +2,7 @@
   hosts: "node"
   become: yes
   task:
-    - name: "insatall nginx"
+    - name: "install nginx"
       ansible.builtin.package:
         name: nginx
         state: present
