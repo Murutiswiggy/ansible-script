@@ -22,4 +22,8 @@
           state: started
           enabled: yes     
       when: ansible_os_family == "redhat"    
-  
+    
+    - name: This task should skip on redhar family
+      ansible.builtin.debug:
+        msg: "This is Debian server"
+      when: ansible_os_family == "debian"
