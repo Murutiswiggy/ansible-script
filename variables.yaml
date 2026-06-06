@@ -19,7 +19,7 @@
 #        state: started
 #        enabled: yes
 
-- name: variables
+- name: Variables
   hosts: node
   
   vars:
