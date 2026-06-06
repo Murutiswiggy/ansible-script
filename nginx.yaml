@@ -1,0 +1,10 @@
+- name: "install naginx in node"
+  hosts: "node"
+  become: yes
+  task:
+    - name: "insatall nginx"
+      ansible.builtin.package:
+        name: nginx
+        state: present
+   
+     
