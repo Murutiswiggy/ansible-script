@@ -9,12 +9,12 @@
   tasks:
     - name: install web web_package
       ansible.builtin.package:
-       name: {{web_package}}
+       name: "{{web_package}}"
        state: present
 
     - name: start and enable web web_service
       ansible.builtin.service:
-       name: {{web_service}}
+       name: "{{web_service}}"
        state: started
        enable: yes
 
