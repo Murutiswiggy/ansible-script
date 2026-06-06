@@ -19,18 +19,6 @@
 #        state: started
 #        enabled: yes
 
-- name: Variables
-  hosts: node
-  
-  vars:
-    name: "murali"
-    lastname: "Akkena"
-    course: "devops"
-
-  tasks:
-   name: print variable names
-   ansible.builtin.debug:
-     msg: "HI this {{name}}{{lastname}}, i am learning {{course}}"
 
 # - name: Variables
 #   hosts: node
@@ -46,4 +34,17 @@
 #       ansible.builtin.debug:
 #         msg: "Hi this is {{ name }} {{ lastname }}, I am learning {{ course }}"
 
+- name: Variables
+  hosts: node
   
+
+  vars:
+    name: "murali"
+    lastname: "Akkena"
+    course: "devops"
+
+  tasks:
+    - name: Print variable names
+      ansible.builtin.debug:
+        msg: "Hi this is {{ name }} {{ lastname }}, I am learning {{ course }}"
+
