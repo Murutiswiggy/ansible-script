@@ -15,4 +15,4 @@
       ansible.builtin.service:
         name: "{{web_service}}"
         state: started
-        enable: yes   
+        enabled: yes   
