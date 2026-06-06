@@ -1,8 +1,8 @@
-- name: "install start nginx using variable"
+- name: "install and start nginx"
   hosts: "node"
   become: yes
   
-  var:
+  vars:
    web_package: nginx
    web_service: nginx
 
@@ -16,6 +16,6 @@
       ansible.builtin.service:
        name: "{{web_service}}"
        state: started
-       enable: yes
+       enabled: yes
 
       
