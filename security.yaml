@@ -84,7 +84,7 @@
              - proto: all
                cidr_ip: 0.0.0.0/0
           state: present
-       loop: "{{ seucrity_group }}"
+       loop: "{{ seucrity_groups }}"
        register: sg_result
 
      - name: Print created security group details
