@@ -8,13 +8,13 @@
     security_group_name: mangodb-security-1
 
   tasks:
-    - name: create security group with SSH and HTTP
-      amazon.aws.ec2_security_group:
-        name: "{{security_group_name}}"
-        description: security group created by ansible
-        vpc_id: "{{vpc_id}}"
-        region: "{{aws_region}}"
-        rules:
+     - name: create security group with SSH and HTTP
+       amazon.aws.ec2_security_group:
+         name: "{{security_group_name}}"
+         description: security group created by ansible
+         vpc_id: "{{vpc_id}}"
+         region: "{{aws_region}}"
+         rules:
           - proto: tcp
             ports:
               -22
@@ -25,15 +25,15 @@
             ports:
               -80
 
-        rules_egress:
+         rules_egress:
           - proto: all
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all outbound
-      state: present
-      register: sg_result
+         state: present
+         register: sg_result
 
-    - name: print sceurity group details
-      ansible.builitin.debug:
+     - name: print sceurity group details
+       ansible.builitin.debug:
          - msg: "security group created/found. Group ID is {{ sg_result.group_id }}"
 
           
