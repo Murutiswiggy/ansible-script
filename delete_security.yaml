@@ -1,0 +1,23 @@
+- name: delete asw security group
+  hosts: localhost
+  connection: local
+
+  vars:
+    aws_region: us-east-1
+    vpc_id: vpc-093d1d6550b8b6b9b
+    security_group_name: ansible-practice-sg
+
+  tasks:
+    - name: delete security group
+      amazon.aws.ec2_security_group:
+         name: "{{security_group_name}}"
+         vpc_id: "{{vpc_id}}"
+         region: "{{aws_region}}"
+         state: absent
+      register: delete_sg_result
+
+
+    - name: print delete result
+      ansible.builtin.debug:
+          msg: "security group {{security_group_name}}"
+    
