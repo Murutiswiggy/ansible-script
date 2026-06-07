@@ -40,8 +40,8 @@
 
 ---
 - name: Create AWS security group
-  hosts: node
-  become: yes
+  hosts: localhost
+  connection: local
 
   vars:
     aws_region: us-east-1
