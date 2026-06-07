@@ -1,40 +1,85 @@
-- name: create aws security group
-  hosts: node
-  become: yes
+# - name: create aws security group
+#   hosts: node
+#   become: yes
+
+#   vars:
+#     aws_region: us-east-1
+#     vpc_id: vpc-093d1d6550b8b6b9b
+#     security_group_name: mangodb-security-1
+
+#   tasks:
+#      - name: create security group with SSH and HTTP
+#        amazon.aws.ec2_security_group:
+#          name: "{{security_group_name}}"
+#          description: security group created by ansible
+#          vpc_id: "{{vpc_id}}"
+#          region: "{{aws_region}}"
+#          rules:
+#           - proto: tcp
+#             ports:
+#               -22
+#             cidr_ip: 0.0.0.0/0
+#             rule_desc: allow SSH
+
+#           - proto: tcp
+#             ports:
+#               -80
+
+#          rules_egress:
+#           - proto: all
+#             cidr_ip: 0.0.0.0/0
+#             rule_desc: allow all outbound
+#          state: present
+#          register: sg_result
+
+#      - name: print sceurity group details
+#        ansible.builitin.debug:
+#           - msg: "security group created/found. Group ID is {{ sg_result.group_id }}"
+
+
+
+---
+- name: Create AWS security group
+  hosts: localhost
+  connection: local
+  gather_facts: false
 
   vars:
     aws_region: us-east-1
-    vpc_id: vpc-093d1d6550b8b6b9b
-    security_group_name: mangodb-security-1
+    vpc_id: vpc-xxxxxxxxxxxxxxxxx
+    security_group_name: ansible-practice-sg
 
   tasks:
-     - name: create security group with SSH and HTTP
-       amazon.aws.ec2_security_group:
-         name: "{{security_group_name}}"
-         description: security group created by ansible
-         vpc_id: "{{vpc_id}}"
-         region: "{{aws_region}}"
-         rules:
+    - name: Create security group with SSH and HTTP access
+      amazon.aws.ec2_security_group:
+        name: "{{ security_group_name }}"
+        description: Security group created by Ansible
+        vpc_id: "{{ vpc_id }}"
+        region: "{{ aws_region }}"
+        rules:
           - proto: tcp
             ports:
-              -22
+              - 22
             cidr_ip: 0.0.0.0/0
-            rule_desc: allow SSH
+            rule_desc: Allow SSH
 
           - proto: tcp
             ports:
-              -80
+              - 80
+            cidr_ip: 0.0.0.0/0
+            rule_desc: Allow HTTP
 
-         rules_egress:
+        rules_egress:
           - proto: all
             cidr_ip: 0.0.0.0/0
-            rule_desc: allow all outbound
-         state: present
-         register: sg_result
+            rule_desc: Allow all outbound
 
-     - name: print sceurity group details
-       ansible.builitin.debug:
-          - msg: "security group created/found. Group ID is {{ sg_result.group_id }}"
+        state: present
+      register: sg_result
+
+    - name: Print security group details
+      ansible.builtin.debug:
+        msg: "Security group created/found. Group ID is {{ sg_result.group_id }}"
 
           
       
