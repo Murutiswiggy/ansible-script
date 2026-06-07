@@ -45,7 +45,7 @@
 
   vars:
     aws_region: us-east-1
-    vpc_id: vpc-xxxxxxxxxxxxxxxxx
+    vpc_id: vpc-093d1d6550b8b6b9b
     security_group_name: ansible-practice-sg
 
   tasks:
