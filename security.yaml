@@ -20,10 +20,12 @@
               -22
             cidr_ip: 0.0.0.0/0
             rule_desc: allow SSH
+
           - proto: tcp
             ports:
               -80
-      rules_egress:
+
+        rules_egress:
           - proto: all
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all outbound
