@@ -41,7 +41,60 @@
 #         msg: "Security group created/found. Group ID is {{ sg_result.group_id }}"
 
 
-- name: create multipul aws security groups
+# - name: create multipul aws security groups
+#   hosts: localhost
+#   connection: local
+#   gather_facts: false
+
+#   vars:
+#     aws_region: us-east-1
+#     vpc_id: vpc-093d1d6550b8b6b9b
+
+#     security_groups:
+#        - name: mongodb-security-1
+#          description: for mongodb
+#          ports:
+#            - 22
+#            - 27017
+
+#        - name: nginx-security-1
+#          description: for nginx
+#          ports:
+#            - 22
+#            - 80
+
+#        - name: app-security-1
+#          description: for app
+#          ports:
+#            - 22
+#            - 8080
+
+#   tasks:
+#      - name: create multipul security groups
+#        amazon.aws.ec2_security_group:
+#           name: "{{ item.name }}"
+#           vpc_id: "{{ vpc_id }}"
+#           region: "{{ aws_region }}"
+#           rules:
+#             - proto: tcp
+#               ports: "{{ item.ports }}"
+#               cidr_ip: 0.0.0.0/0
+#               rule_desc: allow required TCP ports
+#           rules_egress:
+#              - proto: all
+#                cidr_ip: 0.0.0.0/0
+#           state: present
+#        loop: "{{ seucrity_groups }}"
+#        register: sg_result
+
+#      - name: Print created security group details
+#        ansible.builtin.debug:
+#          msg: "Security group {{ item.group_name }} ID is {{ item.group_id }}"
+#        loop: "{{ sg_results.results }}"   
+
+
+---
+- name: Create multiple AWS security groups
   hosts: localhost
   connection: local
   gather_facts: false
@@ -51,44 +104,45 @@
     vpc_id: vpc-093d1d6550b8b6b9b
 
     security_groups:
-       - name: mongodb-security-1
-         description: for mongodb
-         ports:
-           - 22
-           - 27017
+      - name: mongodb-security-1
+        description: for mongodb
+        ports:
+          - 22
+          - 27017
 
-       - name: nginx-security-1
-         description: for nginx
-         ports:
-           - 22
-           - 80
+      - name: nginx-security-1
+        description: for nginx
+        ports:
+          - 22
+          - 80
 
-       - name: app-security-1
-         description: for app
-         ports:
-           - 22
-           - 8080
+      - name: app-security-1
+        description: for app
+        ports:
+          - 22
+          - 8080
 
   tasks:
-     - name: create multipul security groups
-       amazon.aws.ec2_security_group:
-          name: "{{ item.name }}"
-          vpc_id: "{{ vpc_id }}"
-          region: "{{ aws_region }}"
-          rules:
-            - proto: tcp
-              ports: "{{ item.ports }}"
-              cidr_ip: 0.0.0.0/0
-              rule_desc: allow required TCP ports
-          rules_egress:
-             - proto: all
-               cidr_ip: 0.0.0.0/0
-          state: present
-       loop: "{{ seucrity_groups }}"
-       register: sg_result
+    - name: Create multiple security groups
+      amazon.aws.ec2_security_group:
+        name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        vpc_id: "{{ vpc_id }}"
+        region: "{{ aws_region }}"
+        rules:
+          - proto: tcp
+            ports: "{{ item.ports }}"
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow required TCP ports
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all outbound
+        state: present
+      loop: "{{ security_groups }}"
+      register: sg_results
 
-     - name: Print created security group details
-       ansible.builtin.debug:
-         msg: "Security group {{ item.group_name }} ID is {{ item.group_id }}"
-       loop: "{{ sg_results.results }}"   
-           
+    - name: Print created security group details
+      ansible.builtin.debug:
+        msg: "Security group {{ item.group_name }} ID is {{ item.group_id }}"
+      loop: "{{ sg_results.results }}"
