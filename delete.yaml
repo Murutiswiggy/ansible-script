@@ -55,7 +55,15 @@
 - name: Delete EC2 instances
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts:  false
+
+  vars:
+    aws_region: us-east-1
+
+    instance_names:
+      - web-server
+      - app-server
+      - db-server
 
   tasks:
     - name: Terminate EC2 instances by name
