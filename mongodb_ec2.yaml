@@ -1,0 +1,28 @@
+---
+- name: create ec2 instance_name
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: create ec2 instance
+      amazon.aws.ec2_instance:
+        name: "{{ item }}"
+        region: "{{ aws_region }}"
+        image_id: "{{ image_id }}"
+        intance_id: "{{ instance_type }}"
+        subnet_id: "{{ subnet_id }}"
+        security_group: "{{ security_group_name }}"
+        network:
+          assign_public_ip: true
+          wait: true
+          state: running
+          tags:
+            name: "{{ item }}"
+      loop: "{{ instance_name }}"
+      register: ec2_result
+    - name: print ec2 result
+      ansible.builtin.debug:
+        msg: "ec2 create comleted for {{ item.item }}"
+      loop: "{{ ec2_result.results}}"  
+      

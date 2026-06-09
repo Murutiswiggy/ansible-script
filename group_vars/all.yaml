@@ -1,0 +1,12 @@
+---
+aws_region: us-east-1
+vpc_id: vpc-093d1d6550b8b6b9b
+subnet_id: subnet-0695d9ae0699a1bc1
+image_id: ami-0220d79f3f480ecf5
+security_group_name: sg-06ef085c36934323c
+instance_type: t3.micro
+
+instance_name:
+    - web-server
+    - app-server
+    - db-server
