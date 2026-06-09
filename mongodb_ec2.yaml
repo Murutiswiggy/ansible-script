@@ -10,7 +10,7 @@
         name: "{{ item }}"
         region: "{{ aws_region }}"
         image_id: "{{ image_id }}"
-        intance_id: "{{ instance_type }}"
+        intance_type: "{{ instance_type }}"
         subnet_id: "{{ subnet_id }}"
         security_group: "{{ security_group_name }}"
         network:
